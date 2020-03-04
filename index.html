@@ -1,0 +1,59 @@
+---
+layout: blog
+title: Blog
+---
+
+<main class="main pt-4" role="main">
+  <h2>Why you want to join amrita cs star?</h2>
+  <p>because amrita cs star provides a unique style of workshops and encouraging students from start to end..</p>
+  <h2>What are you intrests?</h2>
+  <p>basically my intrests are:
+    *Web blogging.
+    *computative programming.
+    *creating web pages.
+  </p>
+  <h2>What do you want to work on when you join this club why?</h2>
+  <p>I want to work on web pages and to create new styles of pages and to learn from start to end how to become a good web developer..</p>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-9">
+{% for post in paginator.posts %}
+          <article class="card mb-4">
+            <header class="card-header">
+              <div class="card-meta">
+                <time>Published on {{ post.date | date_to_string }}</time>
+                <span>
+                  in - 
+                  {% if post %}
+                    {% assign categories = post.categories %}
+                  {% else %}
+                    {% assign categories = page.categories %}
+                  {% endif %}
+                  {% for category in categories %}
+                  <a href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
+                  {% unless forloop.last %}&nbsp;{% endunless %}
+                  {% endfor %}
+                </span>
+
+              </div>
+              <a href="{{site.baseurl}}{{ post.url }}">
+                <h4 class="card-title">{{ post.title }}</h4>
+              </a>
+            </header>
+            <a href="{{site.baseurl}}{{ post.url }}">
+              <img class="card-img" src="{{site.baseurl}}/img/{{ post.image }}" alt="" />
+            </a>
+            <div class="card-body">
+              <p class="card-text">{{ post.content | strip_html | truncatewords:40 }}</p>
+            </div>
+          </article>
+{% endfor %}
+        </div>  
+		{% include sidebar.html %}
+        </div>
+		
+        </div>
+      	{% include pagination.html %}
+		</main>
+{% include footer.html %}
